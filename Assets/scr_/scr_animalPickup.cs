@@ -14,11 +14,12 @@ public class scr_animalPickup : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            other.GetComponent<scr_score>().score++;
+            collision.gameObject.GetComponent<scr_score>().score++;
+            Destroy(this.gameObject);
         }
     }
 }

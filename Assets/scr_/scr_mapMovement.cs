@@ -8,6 +8,8 @@ public class scr_mapMovement : MonoBehaviour {
     private float rotationZ;
 
     public float sensitivity;
+    public float rotationXClamp;
+    public float rotationZClamp;
 
 	// Use this for initialization
 	void Start () {
@@ -16,11 +18,9 @@ public class scr_mapMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        rotationX += Input.GetAxis("Vertical") * sensitivity;
-        rotationZ -= Input.GetAxis("Horizontal") * sensitivity;
+        rotationX = Mathf.Clamp(rotationX + Input.GetAxis("Vertical") * sensitivity, -rotationXClamp, rotationXClamp);
+        rotationZ = Mathf.Clamp(rotationZ - Input.GetAxis("Horizontal") * sensitivity, -rotationZClamp, rotationZClamp);
 
         transform.rotation = Quaternion.Euler(rotationX, 0f, rotationZ);
-
-        Debug.Log(Input.GetButton("AButton"));
 	}
 }
